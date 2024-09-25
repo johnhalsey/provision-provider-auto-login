@@ -8,6 +8,7 @@ use Upmind\ProvisionBase\Laravel\ProvisionServiceProvider;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Example\Provider as ExampleProvider;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Generic\Provider as GenericProvider;
 use Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\Provider as SpamExpertsProvider;
+use Upmind\ProvisionProviders\AutoLogin\Providers\SmarterMail\Provider as SmarterMailProvider;
 
 class LaravelServiceProvider extends ProvisionServiceProvider
 {
@@ -19,5 +20,6 @@ class LaravelServiceProvider extends ProvisionServiceProvider
 
         $this->bindProvider('auto-login', 'generic', GenericProvider::class);
         $this->bindProvider('auto-login', 'spam-experts', SpamExpertsProvider::class);
+        $this->bindProvider('auto-login', 'smarter-mail', SmarterMailProvider::class);
     }
 }

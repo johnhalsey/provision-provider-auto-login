@@ -21,14 +21,14 @@ class CreateParams extends DataSet
     public static function rules(): Rules
     {
         return new Rules([
-            'user_id' => ['required'],
-            'service_identifier' => ['nullable', 'string'],
-            'package_identifier' => ['nullable', 'string'],
-            'email' => ['nullable', 'email'],
-            'customer_name' => ['nullable', 'string'],
-            'promo_codes' => ['nullable', 'array'],
-            'promo_codes.*' => ['string'],
-            'extra' => ['nullable', 'array'],
+            'user_id'            => ['required'],
+            'service_identifier'  => ['nullable', 'string'],
+            'package_identifier'  => ['nullable', 'string'],
+            'email'              => ['nullable', 'email'],
+            'customer_name'      => ['nullable', 'string'],
+            'promo_codes'        => ['nullable', 'array'],
+            'promo_codes.*'      => ['string'],
+            'extra'              => ['nullable', 'array'],
         ]);
     }
 }
