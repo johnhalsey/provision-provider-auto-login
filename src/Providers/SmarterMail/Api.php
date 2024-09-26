@@ -43,22 +43,34 @@ class Api
                 'path'             => '/var/lib/smartermail/Domains/' . $domain,
                 'hostname'         => 'mail:' . $domain,
                 'isEnabled'        => true,
-                'userLimit'        => 10,
-                'aliasLimit'       => 1000,
-                'domainAliasCount' => 1000,
-                'listLimit'        => 1000,
-                'maxSize'          => 100000000000,
+                'userLimit'        => $params->userLimit,
+                'aliasLimit'       => $params->aliasLimit,
+                'domainAliasCount' => $params->domainAliasCount,
+                'listLimit'        => $params->listLimit,
+                'maxSize'          => $params->maxSize
             ],
             'domainLocation'                  => 0,
             'deliverLocallyForExternalDomain' => true,
-            'adminUsername'                   => '',
-            'adminPassword'                   => '',
+            'adminUsername'                   => $params->adminUsername,
+            'adminPassword'                   => $params->adminPassword,
         ]);
     }
 
     public function terminateDomain(AccountIdentifierParams $params): array
     {
         return $this->post('settings/sysadmin/domain-delete/' . $params->service_identifier . '/true');
+    }
+
+    public function toggleDomainStatus(AccountIdentifierParams $params, bool $isEnabled)
+    {
+        return $this->post(
+            'settings/sysadmin/domain-settings/' . $params->service_identifier,
+            [
+                'domainSettings' => [
+                    'isEnabled' => $isEnabled
+                ]
+            ]
+        );
     }
 
     /**

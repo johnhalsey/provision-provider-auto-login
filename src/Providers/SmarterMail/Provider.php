@@ -54,7 +54,7 @@ class Provider extends Category implements ProviderInterface
 
         return CreateResult::create()
             ->setMessage('Domain created')
-            ->setServiceIdentifier($response['name'])
+            ->setServiceIdentifier($response['domainData']['name'])
             ->setPackageIdentifier($params->package_identifier);
     }
 
@@ -79,6 +79,12 @@ class Provider extends Category implements ProviderInterface
      */
     public function suspend(AccountIdentifierParams $params): EmptyResult
     {
+        try{
+            $this->api()->toggleDomainStatus($params, false);
+        } catch (\Exception $e) {
+            $this->errorResult($e->getMessage());
+        }
+
         return EmptyResult::create()
             ->setMessage('Account suspended');
     }
@@ -88,6 +94,12 @@ class Provider extends Category implements ProviderInterface
      */
     public function unsuspend(AccountIdentifierParams $params): EmptyResult
     {
+        try{
+            $this->api()->toggleDomainStatus($params, true);
+        } catch (\Exception $e) {
+            $this->errorResult($e->getMessage());
+        }
+
         return EmptyResult::create()
             ->setMessage('Account unsuspended');
     }
